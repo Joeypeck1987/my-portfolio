@@ -1,8 +1,45 @@
 import * as THREE from 'three';
+import * as dat from 'dat.gui';
 
+//dat gui for edits
+const gui = new dat.GUI();
+const world = {
+  plane: {
+    width: 10,
+    height: 10,
+    widthSegments: 10,
+    heightSegments: 10
+  }
+}
+
+//adjust width
+gui.add(world.plane, 'width', 1, 20).onChange(generatePlane);
+
+//adjust height
+gui.add(world.plane, 'height', 1, 20).onChange(generatePlane);
+
+//adjust width segments 
+gui.add(world.plane, 'widthSegments', 1, 50).onChange(generatePlane);
+
+//adjust height segments 
+gui.add(world.plane, 'heightSegments', 1, 50).onChange(generatePlane);
+
+function generatePlane() {
+  planeMesh.geometry.dispose();
+  planeMesh.geometry = new THREE.PlaneGeometry(world.plane.width, world.plane.height,world.plane.widthSegments,world.plane.heightSegments);
+
+  const {array} = planeMesh.geometry.attributes.position;
+
+  for(let i = 0; i < array.length; i+= 3){
+    const x = array[i];
+    const y = array[i + 1];
+    const z = array[i + 2];
+
+    array[i + 2] = z + Math.random();
+}
+}
 // creating a scene
 const scene = new THREE.Scene();
-
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
