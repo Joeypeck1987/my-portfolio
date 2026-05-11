@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eidolon Sleep - HTML/CSS Recreation</title>
+  <style>
+  :root {
+    --bg: #0d0d0d;
+    --bg-deep: #080706;
+    --panel: rgba(24, 24, 24, 0.92);
+    --panel-soft: rgba(34, 31, 25, 0.86);
+    --border: #3b3327;
+    --border-bright: #6d5735;
+    --text: #e8e1d0;
+    --muted: #bca66b;
+    --gold: #f0dca2;
+    --link: #d6b15e;
+    --link-hover: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.5);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    color: var(--text);
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(circle at top left, rgba(214, 177, 94, 0.12), transparent 28rem),
+      radial-gradient(circle at bottom right, rgba(109, 87, 53, 0.16), transparent 26rem),
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: auto, auto, 80px 80px, 80px 80px;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, transparent 45%, rgba(0, 0, 0, 0.48));
+  }
+
+  /* entry link */
+  .entry-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .poster {
+    position: relative;
+    width: min(100vw, 1024px);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background:
+      radial-gradient(circle at 50% 47%, rgba(240, 220, 162, 0.12), transparent 19%),
+      radial-gradient(circle at 50% 72%, rgba(214, 177, 94, 0.08), transparent 18%),
+      linear-gradient(#15120f, #10100e 70%, var(--bg-deep));
+    box-shadow:
+      0 1.5rem 4rem var(--shadow),
+      inset 0 0 0 1px rgba(240, 220, 162, 0.05);
+  }
+
+  .entry-link:hover .poster,
+  .entry-link:focus-visible .poster {
+    filter: brightness(1.08);
+    transform: scale(1.01);
+  }
+
+  .poster::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 22%, rgba(240, 220, 162, 0.055), transparent 20%),
+      radial-gradient(circle at 78% 25%, rgba(214, 177, 94, 0.04), transparent 20%),
+      repeating-radial-gradient(circle at 45% 40%, rgba(240, 220, 162, 0.028) 0 1px, transparent 1px 9px);
+    opacity: 0.42;
+    mix-blend-mode: screen;
+  }
+
+  .poster::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, transparent 42%, rgba(0, 0, 0, 0.52));
+  }
+
+  .scene {
+    position: absolute;
+    inset: 0;
+    top: 120px;
+  }
+
+  /* Crescent moon */
+  .moon {
+    position: absolute;
+    left: 50%;
+    top: 72px;
+    width: 320px;
+    height: 320px;
+    transform: translateX(-50%) rotate(-18deg);
+    border-radius: 50%;
+    background:
+      radial-gradient(
+        circle at 40% 45%,
+        rgba(240, 220, 162, 1),
+        rgba(232, 225, 208, 0.98) 35%,
+        rgba(188, 166, 107, 0.96) 61%,
+        rgba(240, 220, 162, 1) 100%
+      );
+    filter:
+      drop-shadow(0 0 14px rgba(214, 177, 94, 0.32))
+      drop-shadow(0 0 34px rgba(109, 87, 53, 0.18));
+  }
+
+  .moon::before {
+    content: "";
+    position: absolute;
+    left: 105px;
+    top: -10px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #15120f;
+    box-shadow: inset 20px 0 30px rgba(0, 0, 0, 0.32);
+  }
+
+  .moon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 36% 28%, rgba(59, 51, 39, 0.28) 0 5px, transparent 6px),
+      radial-gradient(circle at 28% 42%, rgba(59, 51, 39, 0.26) 0 8px, transparent 9px),
+      radial-gradient(circle at 42% 56%, rgba(59, 51, 39, 0.24) 0 6px, transparent 7px),
+      radial-gradient(circle at 24% 61%, rgba(109, 87, 53, 0.22) 0 4px, transparent 5px),
+      radial-gradient(circle at 52% 70%, rgba(59, 51, 39, 0.22) 0 7px, transparent 8px);
+    opacity: 0.82;
+    clip-path: circle(50% at 50% 50%);
+  }
+
+  /* Ground mist */
+  .mist {
+    position: absolute;
+    left: 50%;
+    top: 430px;
+    width: 460px;
+    height: 65px;
+    transform: translateX(-50%);
+    opacity: 0.68;
+    background:
+      radial-gradient(ellipse at 18% 55%, rgba(240, 220, 162, 0.18), transparent 46%),
+      radial-gradient(ellipse at 50% 45%, rgba(240, 220, 162, 0.34), transparent 44%),
+      radial-gradient(ellipse at 82% 55%, rgba(214, 177, 94, 0.18), transparent 46%),
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(214, 177, 94, 0.08) 18%,
+        rgba(240, 220, 162, 0.18) 50%,
+        rgba(214, 177, 94, 0.08) 82%,
+        transparent 100%
+      );
+    filter: blur(4px);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 18%, black 82%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, black 18%, black 82%, transparent 100%);
+  }
+
+  .ground-line {
+    position: absolute;
+    left: 50%;
+    top: 492px;
+    width: 820px;
+    height: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(214, 177, 94, 0.16) 20%,
+      rgba(240, 220, 162, 0.72) 50%,
+      rgba(214, 177, 94, 0.16) 80%,
+      transparent 100%
+    );
+    opacity: 0.82;
+  }
+
+  /* Wordmark */
+  .title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 612px;
+    text-align: center;
+    color: var(--gold);
+    font-size: clamp(3.7rem, 8vw, 6rem);
+    line-height: 1;
+    letter-spacing: 0.03em;
+    font-variant: small-caps;
+    text-shadow:
+      0 2px 1px rgba(0, 0, 0, 0.85),
+      0 0 2rem rgba(214, 177, 94, 0.22);
+  }
+
+  .title span {
+    display: inline-block;
+    margin: 0 0.18em;
+  }
+
+  .star {
+    position: absolute;
+    left: 50%;
+    top: 778px;
+    width: 14px;
+    height: 14px;
+    transform: translateX(-50%) rotate(45deg);
+    background: var(--gold);
+    clip-path: polygon(50% 0, 63% 37%, 100% 50%, 63% 63%, 50% 100%, 37% 63%, 0 50%, 37% 37%);
+    filter: drop-shadow(0 0 6px rgba(214, 177, 94, 0.68));
+  }
+
+  @media (max-width: 700px) {
+    .scene {
+      transform: scale(0.78);
+      transform-origin: 50% 0;
+    }
+
+    .title {
+      top: 58%;
+    }
+
+    .star {
+      top: 70%;
+    }
+  }
+
+
+  /* Three.js dust layer: sits above the poster background, behind the moon/title. */
+  #poster-particles {
+    position: absolute;
+
+  .poster::before {
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .scene {
+    z-index: 3;
+  }
+
+  .title,
+  .star {
+    z-index: 4;
+  }
+
+  .poster::after {
+    z-index: 5;
+  }
+
+</style>
+</head>
+<body>
+<a class="entry-link" href="home.html" aria-label="Enter portfolio">
+  <main class="poster" aria-label="Eidolon Sleep black and white crescent moon">
+    <canvas id="poster-particles" aria-hidden="true"></canvas>
+    <section class="scene">
+      <div class="moon"></div>
+
+
+      <div class="mist"></div>
+      <div class="ground-line"></div>
+    </section>
+
+    <h1 class="title"><span>Eidolon</span> <span>Sleep</span></h1>
+    <div class="star"></div>
+  </main>
+</a>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script src="js/poster-particles.js"></script>
+</body>
+</html>
+

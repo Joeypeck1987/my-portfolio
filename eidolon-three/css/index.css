@@ -1,0 +1,1096 @@
+/*
+  Store reusable color values as CSS variables.
+*/
+:root {
+  --bg: #0d0d0d;
+  --bg-deep: #080706;
+  --panel: rgba(24, 24, 24, 0.92);
+  --panel-soft: rgba(34, 31, 25, 0.86);
+  --border: #3b3327;
+  --border-bright: #6d5735;
+  --text: #e8e1d0;
+  --muted: #bca66b;
+  --gold: #f0dca2;
+  --link: #d6b15e;
+  --link-hover: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.5);
+}
+
+/*
+   make layouts easier to control.
+*/
+* {
+  box-sizing: border-box;
+}
+
+/*
+  Smooth scrolling makes internal navigation links glide to each section.
+*/
+html {
+  scroll-behavior: smooth;
+}
+
+/*
+   layered background-image to create the atmosphere:
+  - two radial gradients create soft gold/brown glows
+  - two linear gradients create the faint old-web grid pattern
+*/
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: "Inter", Arial, sans-serif;
+  line-height: 1.7;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at top left, rgba(214, 177, 94, 0.12), transparent 28rem),
+    radial-gradient(circle at bottom right, rgba(109, 87, 53, 0.16), transparent 26rem),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: auto, auto, 80px 80px, 80px 80px;
+}
+
+/*
+  Fixed vignette overlay over the whole page.
+  pointer-events: none to keep it from blocking clicks.
+  The result is darker on the edges, giving the page a more cryptic feeling.
+*/
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, transparent 45%, rgba(0, 0, 0, 0.48));
+}
+
+
+img {
+  max-width: 100%;
+}
+
+/* 
+  Sticky header 
+  backdrop-filter gives the header a blurred glass effect. */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+  background: rgba(13, 13, 13, 0.88);
+  backdrop-filter: blur(10px);
+}
+
+/*
+  Center the nav content and Flexbox to place the mark on the left
+  and the keep nav links on the right.
+*/
+.nav-wrap {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  min-height: 4.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/*
+  Styles for small circular initial mark in the navigation.
+  inline-grid and place-items center the letters inside the circle.
+*/
+.nav-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--border-bright);
+  border-radius: 50%;
+  color: var(--gold);
+  font-family: "Cinzel", Georgia, serif;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  background: #15120f;
+  box-shadow: 0 0 18px rgba(214, 177, 94, 0.12);
+}
+
+/*
+  Turns the navigation list into a horizontal Flexbox row.
+  flex-wrap allows the links to wrap onto another line on smaller screens.
+*/
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/*
+  Gives both nav links and connect links the same pill button style.
+  This transforms the style of links.
+*/
+.nav-links a,
+.connect-list a {
+  display: inline-block;
+  color: var(--link);
+  text-decoration: none;
+  border: 1px solid rgba(214, 177, 94, 0.35);
+  border-radius: 999px;
+  padding: 0.55rem 0.85rem;
+  background: rgba(21, 21, 21, 0.72);
+  transition: transform 180ms ease, color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+/*
+  Add effect for mouse hover and keyboard focus.
+*/
+.nav-links a:hover,
+.connect-list a:hover,
+.nav-links a:focus-visible,
+.connect-list a:focus-visible {
+  color: var(--link-hover);
+  border-color: var(--gold);
+  background: rgba(109, 87, 53, 0.32);
+  transform: translateY(-2px);
+}
+
+/*
+  The page shell controls the main width of the site.
+*/
+.page-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+/*
+  *** The hero area. ***
+  text-align: center to change alignment on a section.
+*/
+.hero {
+  padding: 3.5rem 0 2rem;
+  text-align: center;
+}
+
+/*
+  large card around name and tagline.
+  The gradient, shadow, border radius, and inset line give it a polished panel effect.
+*/
+.hero-frame {
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg, rgba(21, 21, 21, 0.95), rgba(34, 31, 25, 0.72));
+  box-shadow: 0 1.5rem 4rem var(--shadow), inset 0 0 0 1px rgba(240, 220, 162, 0.05);
+  border-radius: 1.5rem;
+  padding: clamp(2rem, 6vw, 5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+/*
+  Adding a decorative moon symbol inside the hero card.
+  ::after creates a pseudo-element that CSS can place visually.
+*/
+.hero-frame::after {
+  content: "☾";
+  position: absolute;
+  right: clamp(1.5rem, 5vw, 4rem);
+  top: 1.3rem;
+  color: rgba(240, 220, 162, 0.18);
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 1;
+}
+
+/*
+  Small label text above the main.
+  Uppercase, small size, and wide letter-spacing make it feel like a caption or inscription.
+*/
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/*
+  Give headings the same display font and tighter line height.
+*/
+h1,
+h2,
+h3 {
+  font-family: "Cinzel", Georgia, serif;
+  line-height: 1.1;
+}
+
+/*
+  Transform the name at the top of the page.
+  clamp() will make the font size responsive: it has a minimum, preferred, and maximum size.
+*/
+h1 {
+  margin: 0;
+  color: var(--gold);
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  text-shadow: 0 0 2rem rgba(214, 177, 94, 0.18);
+}
+
+/* reservation text */
+.tagline {
+  max-width: 54rem;
+  margin: 1rem auto 0;
+  color: var(--muted);
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  font-style: italic;
+}
+
+/*
+  Replaces the old html marquee with a modern CSS animated ticker.
+*/
+.relic-ticker {
+  width: min(44rem, 100%);
+  margin: 2rem auto 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border-bright);
+  border-bottom: 1px solid var(--border-bright);
+  color: #9f8c5b;
+  font-family: "IM Fell English", Georgia, serif;
+  white-space: nowrap;
+}
+
+/*
+  Makes the ticker movable.
+*/
+.relic-ticker span {
+  display: inline-block;
+  padding: 0.65rem 0;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+
+/*
+  Move the ticker text gently left and right.
+*/
+@keyframes drift {
+  from { transform: translateX(-4%); }
+  to { transform: translateX(4%); }
+}
+
+/*
+  This creates the main page layout: side panel on the left, main content on the right.
+  CSS Grid is used here because this is a two-column page structure.
+*/
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.32fr) 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/*
+  Keep the side cards visible while scrolling on larger screens.
+*/
+.side-panel {
+  position: sticky;
+  top: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/*
+  Base card styling shared by multiple content boxes.
+*/
+.card {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--panel);
+  box-shadow: 0 1rem 2.5rem var(--shadow);
+}
+
+/*
+  Add spacing inside section cards and side-panel cards.
+*/
+.section-card,
+.side-panel .card {
+  padding: clamp(1.1rem, 3vw, 2rem);
+}
+
+/*
+  Stack the main sections vertically with even spacing.
+*/
+.main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/*
+  When clicking nav links, prevent section headings from hiding under the sticky header.
+*/
+section {
+  scroll-margin-top: 6rem;
+}
+
+/*
+  Section headings About, Experience, Skills, Projects, and Connect.
+*/
+h2 {
+  margin: 0 0 1rem;
+  color: var(--gold);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/*
+  Add a small line under h2 headings.
+*/
+h2::after {
+  content: "";
+  display: block;
+  width: 5rem;
+  height: 1px;
+  margin-top: 0.75rem;
+  background: var(--border-bright);
+}
+
+/*
+  Smaller headings inside cards.
+*/
+h3 {
+  margin: 0;
+  color: var(--gold);
+  font-size: 1.05rem;
+}
+
+/*
+  bottom spacing on paragraphs
+*/
+p {
+  margin: 0 0 1rem;
+}
+
+/*
+  Styles of quoted text.
+*/
+blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--border-bright);
+  color: #d7c18c;
+  background: rgba(240, 220, 162, 0.05);
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: 1.18rem;
+}
+
+/*
+  Style expandable details boxes.
+*/
+details {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(109, 87, 53, 0.58);
+  border-radius: 0.8rem;
+  background: rgba(8, 7, 6, 0.32);
+}
+
+/*
+  Makes the summary line look clickable.
+*/
+summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/*
+  Styles definition-list terms.
+*/
+dt {
+  color: var(--link);
+  font-weight: 700;
+}
+
+/*
+  Indentation and spacing to descriptions under definition terms.
+*/
+dd {
+  margin: 0 0 0.8rem 1rem;
+}
+
+/*
+  Give side cards a font to separate them from the main body content.
+*/
+.sign-card,
+.symbol-card {
+  font-family: "IM Fell English", Georgia, serif;
+}
+
+/*
+  Spaces labels in the Signs card and colors.
+*/
+.sign-card label {
+  display: block;
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
+/*
+  Meter and progress bar width.
+  accent-color changes the browsers default fill color where supported.
+*/
+meter,
+progress {
+  width: 100%;
+  height: 1rem;
+  accent-color: var(--link);
+}
+
+/*
+  Styles the short quote in the Signs card.
+*/
+.sign-card q {
+  display: block;
+  margin-top: 1.25rem;
+  color: #d7c18c;
+}
+
+/*
+  Turn symbol list into stacked blocks.
+*/
+.symbol-card ul {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/*
+  Style each symbol item as a small panel.
+*/
+.symbol-card li {
+  padding: 0.75rem;
+  border: 1px solid rgba(109, 87, 53, 0.45);
+  border-radius: 0.75rem;
+  background: rgba(8, 7, 6, 0.35);
+}
+
+/*
+  Turns the Experience list into a vertical Flexbox layout.
+*/
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/*
+  Transform the experience list item into a styled block card.
+*/
+.experience-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.1rem;
+  border: 1px solid rgba(109, 87, 53, 0.58);
+  border-radius: 0.9rem;
+  background: linear-gradient(145deg, rgba(36, 32, 24, 0.72), rgba(15, 15, 15, 0.74));
+}
+
+/*
+  Flexbox used inside each Experience card.
+  The title stays on the left and the time/category note stays to the right.
+*/
+.experience-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/*
+  Styles the small right side label in each Experience heading.
+  white-space: nowrap prevents short labels from breaking onto two lines.
+*/
+.experience-heading span {
+  color: var(--muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/*
+  Removes extra paragraph margin inside Experience cards.
+*/
+.experience-list p {
+  margin: 0;
+}
+
+/*
+  Styles the small technical/status tags.
+*/
+samp {
+  display: inline-block;
+  width: fit-content;
+  color: #101010;
+  background: var(--muted);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+/*
+  Decorative row beneath Experience.
+*/
+.glyph-row {
+  margin: 1.25rem 0 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: 1.6rem;
+  letter-spacing: 0.25em;
+}
+
+/*
+  Gives empty placeholder sections enough height to look intentional.
+  Useful for Skills, which the assignment says can be empty for now.
+*/
+.empty-section {
+  min-height: 8rem;
+}
+
+/*
+  Adding placeholder text after empty sections using CSS.
+*/
+.empty-section::after {
+  content: "Reserved for the next layer.";
+  display: block;
+  color: rgba(232, 225, 208, 0.48);
+  font-family: "IM Fell English", Georgia, serif;
+  font-style: italic;
+}
+
+/*
+  Prepare the Projects list for JavaScript/GitHub API content to be added later.
+  The list is empty in the HTML for the assignment.
+*/
+.project-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/*
+  Turns the Connect links into a flexible row of styled buttons.
+*/
+.connect-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+/*
+  Styles of the contact form fieldset as a clean grid with spacing between form controls.
+*/
+.contact-form fieldset {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(109, 87, 53, 0.58);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+/*
+  fieldset legend styles.
+*/
+legend {
+  padding: 0 0.6rem;
+  color: var(--gold);
+  font-family: "Cinzel", Georgia, serif;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+/*
+  Styling text input and textareas with darker backgrounds and borders.
+*/
+input,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(109, 87, 53, 0.72);
+  border-radius: 0.65rem;
+  padding: 0.75rem;
+  color: var(--text);
+  background: rgba(8, 7, 6, 0.65);
+}
+
+/*
+  Allows the message box to be resized vertically only.
+*/
+textarea {
+  resize: vertical;
+}
+
+/*
+  Form buttons in a wrapping Flexbox row.
+*/
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/*
+  Main button styling.
+*/
+button {
+  cursor: pointer;
+  border: 1px solid rgba(214, 177, 94, 0.55);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  color: #111111;
+  background: var(--link);
+  font-weight: 700;
+}
+
+/*
+  Reset buttons a quieter style.
+*/
+button[type="reset"] {
+  color: var(--text);
+  background: transparent;
+}
+
+/*
+  Centering the HTML Relics section.
+*/
+.relics-card {
+  text-align: center;
+}
+
+.relics-card h2::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*
+  Flexible table display for the relic information.
+*/
+.relic-table {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  margin: 1rem 0;
+  border: 1px solid rgba(109, 87, 53, 0.72);
+}
+
+/*
+  Styling for each cell in the relic table.
+*/
+.relic-table span,
+.relic-table time {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(109, 87, 53, 0.4);
+}
+
+/*
+  Keeps address text from becoming italic by browser default.
+*/
+address {
+  color: var(--muted);
+  font-style: normal;
+}
+
+/*
+  Responsive design for small screens.
+  These changes make the layout work for phones.
+*/
+@media (max-width: 780px) {
+  /* Centers the navigation when there is less horizontal space. */
+  .nav-wrap {
+    justify-content: center;
+  }
+
+  /* Hides the JP mark on small screens to give the links more room. */
+  .nav-mark {
+    display: none;
+  }
+
+  /* Centers wrapped navigation links. */
+  .nav-links {
+    justify-content: center;
+  }
+
+  /* Changes the two-column grid into a single-column layout. */
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Turns off sticky side panel behavior on small screens. */
+  .side-panel {
+    position: static;
+  }
+
+  /* Stacks the Experience title and date/category label vertically on narrow screens. */
+  .experience-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Blog and archive additions */
+.panel-link,
+.project-card a {
+  display: inline-block;
+  width: fit-content;
+  color: #101010;
+  text-decoration: none;
+  border: 1px solid rgba(240, 220, 162, 0.55);
+  border-radius: 999px;
+  padding: 0.65rem 0.9rem;
+  background: var(--link);
+  font-weight: 700;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.panel-link:hover,
+.project-card a:hover,
+.panel-link:focus-visible,
+.project-card a:focus-visible {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+.skill-list,
+.archive-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-list li,
+.archive-list a {
+  display: inline-block;
+  border: 1px solid rgba(109, 87, 53, 0.55);
+  border-radius: 999px;
+  padding: 0.55rem 0.8rem;
+  color: var(--text);
+  background: rgba(8, 7, 6, 0.38);
+}
+
+.archive-list a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.archive-list a:hover,
+.archive-list a:focus-visible {
+  color: var(--link-hover);
+  border-color: var(--gold);
+}
+
+.project-grid,
+.image-grid,
+.influence-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.project-grid,
+.influence-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project-card,
+.post-card,
+.influence-card {
+  border: 1px solid rgba(109, 87, 53, 0.58);
+  border-radius: 0.9rem;
+  padding: 1.1rem;
+  background: linear-gradient(145deg, rgba(36, 32, 24, 0.72), rgba(15, 15, 15, 0.74));
+}
+
+.project-card p,
+.influence-card p,
+.post-card p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-shell {
+  width: min(1240px, calc(100% - 2rem));
+}
+
+.blog-layout {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.28fr) 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.blog-hero .hero-frame::after {
+  content: "✧";
+}
+
+.featured-post {
+  background:
+    linear-gradient(145deg, rgba(40, 35, 25, 0.9), rgba(14, 13, 12, 0.94)),
+    radial-gradient(circle at top right, rgba(240, 220, 162, 0.14), transparent 18rem);
+}
+
+.post-kicker,
+.post-meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-kicker {
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+.post-meta {
+  font-size: 0.78rem;
+}
+
+.post-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.post-heading span {
+  color: var(--muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.lyric-block {
+  border-left: 3px solid var(--border-bright);
+  padding: 0.2rem 0 0.2rem 1rem;
+  color: #d7c18c;
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: 1.18rem;
+}
+
+.lyric-block p {
+  margin: 0.25rem 0;
+}
+
+.note-list {
+  margin: 0;
+}
+
+.music-post audio {
+  width: 100%;
+  margin: 0.5rem 0 0.8rem;
+}
+
+code {
+  color: var(--gold);
+  border: 1px solid rgba(109, 87, 53, 0.45);
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.3rem;
+  background: rgba(8, 7, 6, 0.5);
+}
+
+.image-grid {
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.image-note {
+  position: relative;
+  min-height: 18rem;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(109, 87, 53, 0.58);
+  border-radius: 1rem;
+  background: #090807;
+}
+
+.image-note img {
+  width: 100%;
+  height: 100%;
+  min-height: 18rem;
+  display: block;
+  object-fit: cover;
+  filter: saturate(0.75) contrast(1.06);
+}
+
+.image-note::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 30%, rgba(0, 0, 0, 0.82));
+}
+
+.image-note figcaption {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1;
+  color: var(--text);
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: 1.1rem;
+}
+
+.image-note figcaption strong {
+  display: block;
+  color: var(--gold);
+  font-family: "Cinzel", Georgia, serif;
+  letter-spacing: 0.06em;
+}
+
+.tall-note {
+  min-height: 24rem;
+}
+
+.tall-note img {
+  min-height: 24rem;
+}
+
+.influence-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .project-grid,
+  .image-grid,
+  .influence-grid,
+  .blog-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 780px) {
+  .post-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Keep the blog index from floating awkwardly on desktop */
+.blog-index {
+  position: static;
+}
+/* Three.js atmosphere layer */
+.three-stage {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(240, 220, 162, 0.10), transparent 24rem),
+    radial-gradient(circle at 82% 72%, rgba(109, 87, 53, 0.16), transparent 24rem),
+    #080706;
+}
+
+.three-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    radial-gradient(circle, transparent 42%, rgba(0, 0, 0, 0.5));
+  background-size: 80px 80px, 80px 80px, auto;
+}
+
+.site-header,
+.hero-frame,
+.card {
+  backdrop-filter: blur(12px);
+}
+
+.hero-frame,
+.card {
+  background-color: rgba(13, 13, 13, 0.74);
+}
+
+.hero-frame {
+  transform-style: preserve-3d;
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+
+.hero-frame:hover {
+  transform: perspective(1100px) rotateX(1.5deg) rotateY(-1.5deg) translateY(-0.2rem);
+  border-color: rgba(240, 220, 162, 0.55);
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.62), 0 0 2rem rgba(214, 177, 94, 0.12);
+}
+
+.section-card,
+.side-panel .card,
+.post-card,
+.project-card,
+.influence-card,
+.image-note {
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.section-card:hover,
+.side-panel .card:hover,
+.post-card:hover,
+.project-card:hover,
+.influence-card:hover,
+.image-note:hover {
+  transform: translateY(-3px);
+  border-color: rgba(240, 220, 162, 0.52);
+  box-shadow: 0 1.35rem 3rem rgba(0, 0, 0, 0.58), 0 0 1.4rem rgba(214, 177, 94, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-frame,
+  .section-card,
+  .side-panel .card,
+  .post-card,
+  .project-card,
+  .influence-card,
+  .image-note,
+  .nav-links a,
+  .connect-list a,
+  .panel-link,
+  .project-card a {
+    transition: none;
+  }
+
+  .relic-ticker span {
+    animation: none;
+  }
+}
