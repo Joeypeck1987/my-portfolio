@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Joseph Peck">
+  <meta name="description" content="Joseph Peck's portfolio page: web development, music, lyrics, and creative practice.">
+  <meta name="keywords" content="Joseph Peck, portfolio, HTML, CSS, web development, music, lyrics, creativity">
+  <meta name="theme-color" content="#111111">
+  <title>Joseph Peck's Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IM+Fell+English:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body id="top">
+  <div class="three-stage" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="Main navigation">
+      <a class="nav-mark" href="#top">JP</a>
+      <ul class="nav-links">
+        <li><a href="#About">About</a></li>
+        <li><a href="#Experience">Experience</a></li>
+        <li><a href="#Skills">Skills</a></li>
+        <li><a href="#Projects">Projects</a></li>
+        <li><a href="blog.html">Lyrics &amp; Notes</a></li>
+        <li><a href="#Connect">Connect</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-frame">
+        <p class="eyebrow">portfolio / archive / working craft</p>
+        <h1 id="page-title">Eidolon Sleep</h1>
+        <p class="tagline">builder of strange pages, hidden worlds, and songs buried deep</p>
+        <div class="relic-ticker" aria-label="Decorative portfolio statement">
+          <span>Bones · Candlework · code, fragments, a signal</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <aside class="side-panel" aria-label="Personal signs">
+        <section class="card sign-card">
+          <h2>Signs</h2>
+
+          <label for="light">Light</label>
+          <meter id="light" min="0" max="100" value="74">74%</meter>
+
+          <label for="growth">Growth</label>
+          <progress id="growth" max="100" value="63">63%</progress>
+
+          <label for="echoes">Echoes</label>
+          <meter id="echoes" min="0" max="100" value="88">88%</meter>
+
+          <q>What is buried may still rise.</q>
+        </section>
+
+        <section class="card symbol-card">
+          <h2>Symbols</h2>
+          <ul>
+            <li>☾ Quiet guidance</li>
+            <li>✿ Patient growth</li>
+            <li>⚰ Kept fragments</li>
+          </ul>
+        </section>
+
+        <section class="card symbol-card">
+          <h2>Archive Door</h2>
+          <p>Lyrics, music notes, image fragments, and influences live in the side chamber.</p>
+          <a class="panel-link" href="blog.html">Enter the archive</a>
+        </section>
+      </aside>
+
+      <div class="main-column">
+        <section id="About" class="card section-card">
+          <h2>About</h2>
+          <p>
+            I am learning to turn scattered curiosity into working structures: code, design,
+            writing, music, art, and discipline that survives ordinary days. I like projects with
+            a practical face and a strange pulse underneath.
+          </p>
+
+          <blockquote>
+            “A page can be plain and still carry weather. A skill can begin clumsy and still become a craft.”
+          </blockquote>
+
+          <details open>
+            <summary>What I am building toward</summary>
+            <p>
+              A life where technical skill and creative nerve are not separate rooms. I want to understand systems,
+              make useful things, and keep the work alive enough to avoid becoming mechanical.
+            </p>
+          </details>
+
+          <details>
+            <summary>Small symbols</summary>
+            <dl>
+              <dt>The Moon</dt>
+              <dd>Progress made while the whole road stays partly hidden.</dd>
+
+              <dt>The Garden</dt>
+              <dd>Growth that cannot be forced, only tended and revisited.</dd>
+
+              <dt>The Crypts</dt>
+              <dd>A chamber for fragments worth carrying: lessons, failures, old passions, and unfinished sparks.</dd>
+            </dl>
+          </details>
+        </section>
+
+        <section id="Experience" class="card section-card">
+          <h2>Experience</h2>
+
+          <ul class="experience-list">
+            <li>
+              <div class="experience-heading">
+                <h3>Food Service</h3>
+                <span>Practical work</span>
+              </div>
+              <p>Speed, cleanliness, pressure, repetition, responsibility, and the ability to keep moving when the room gets loud.</p>
+              <samp>reliable under pressure</samp>
+            </li>
+
+            <li>
+              <div class="experience-heading">
+                <h3>Web Development</h3>
+                <span>Current study</span>
+              </div>
+              <p>HTML, CSS, JavaScript fundamentals, debugging, GitHub, Git, layout, and small experiments that teach by breaking.</p>
+              <samp>developer in progress</samp>
+            </li>
+
+            <li>
+              <div class="experience-heading">
+                <h3>Creative Practice</h3>
+                <span>Ongoing craft</span>
+              </div>
+              <p>Gothic songwriting, visual design, music ideas, game worlds, and the search for atmosphere without cheap fog.</p>
+              <samp>atmosphere matters</samp>
+            </li>
+          </ul>
+
+          <p class="glyph-row" aria-hidden="true">☾ · ✿ · ⚰</p>
+        </section>
+
+        <section id="Skills" class="card section-card">
+          <h2>Skills</h2>
+          <ul class="skill-list">
+            <li>HTML structure</li>
+            <li>CSS layout and atmosphere</li>
+            <li>JavaScript fundamentals</li>
+            <li>Git and GitHub workflow</li>
+            <li>Song and lyric</li>
+            <li>Visual world-building</li>
+          </ul>
+        </section>
+
+        <section id="Projects" class="card section-card">
+          <h2>Projects</h2>
+          <div class="project-grid">
+            <article class="project-card">
+              <h3>Portfolio Site</h3>
+              <p>A personal landing page built from a front-end vision and a cabinet-of-curiosities.</p>
+              <a href="#top">View this page</a>
+            </article>
+
+            <article class="project-card">
+              <h3>Lyrics &amp; Notes Archive</h3>
+              <p>A blog-like companion page for lyrics, recordings, influences, and image fragments.</p>
+              <a href="blog.html">Open archive</a>
+            </article>
+          </div>
+        </section>
+
+        <section id="Connect" class="card section-card">
+          <h2>Connect</h2>
+
+          <ul class="connect-list">
+            <li><a href="https://github.com/Joeypeck1987" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/joey-peck-66233b329/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="mailto:Joeypeck1987@gmail.com">Email</a></li>
+            <li><a href="blog.html">Lyrics &amp; Notes</a></li>
+            <li><a href="#top">Return to the top</a></li>
+          </ul>
+
+          <form action="mailto:Joeypeck1987@gmail.com" method="post" enctype="text/plain" class="contact-form">
+            <fieldset>
+              <legend>Contact, by old machinery</legend>
+
+              <label for="name">Your name:</label>
+              <input id="name" name="name" size="30">
+
+              <label for="subject">Choose a subject:</label>
+              <input id="subject" list="subjects" name="subject">
+              <datalist id="subjects">
+                <option value="Portfolio"></option>
+                <option value="Collaboration"></option>
+                <option value="Job Opportunity"></option>
+                <option value="Creative Project"></option>
+                <option value="Music"></option>
+              </datalist>
+
+              <label for="message">Message:</label>
+              <textarea id="message" name="message" rows="5">Hello,</textarea>
+
+              <div class="button-row">
+                <button type="submit">Send via email client</button>
+                <button type="reset">Clear</button>
+              </div>
+            </fieldset>
+          </form>
+        </section>
+
+        <section id="Relics" class="card section-card relics-card">
+          <h2>Relics</h2>
+          <p>
+            This page keeps a few old-web fingerprints: meters, progress bars, details panels,
+            reversed text, and decorative markup used with restraint.
+          </p>
+
+          <div class="relic-table" aria-label="Portfolio relic information">
+            <span><bdo dir="rtl">Joseph Peck</bdo></span>
+            <time datetime="2026-05-09">May 9, 2026</time>
+          </div>
+
+          <address>Joseph Peck · portfolio and archive</address>
+        </section>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="js/three-scene.js"></script>
+</body>
+</html>
